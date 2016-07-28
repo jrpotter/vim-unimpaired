@@ -29,7 +29,6 @@ function! s:MapNextFamily(map,cmd)
     execute 'nmap <silent> ]<C-'.a:map.'> '.map.'NFile'
   endif
 endfunction
-
 call s:MapNextFamily('a','')
 call s:MapNextFamily('b','b')
 call s:MapNextFamily('l','l')
@@ -90,11 +89,6 @@ nnoremap <silent> <Plug>unimpairedDirectoryNext     :<C-U>edit <C-R>=fnamemodify
 nnoremap <silent> <Plug>unimpairedDirectoryPrevious :<C-U>edit <C-R>=fnamemodify(<SID>fnameescape(<SID>FileByOffset(-v:count1)), ':.')<CR><CR>
 nmap ]f <Plug>unimpairedDirectoryNext
 nmap [f <Plug>unimpairedDirectoryPrevious
-
-nmap <silent> <Plug>unimpairedONext     <Plug>unimpairedDirectoryNext:echohl WarningMSG<Bar>echo "]o is deprecated. Use ]f"<Bar>echohl NONE<CR>
-nmap <silent> <Plug>unimpairedOPrevious <Plug>unimpairedDirectoryPrevious:echohl WarningMSG<Bar>echo "[o is deprecated. Use [f"<Bar>echohl NONE<CR>
-nmap ]o <Plug>unimpairedONext
-nmap [o <Plug>unimpairedOPrevious
 
 " }}}1
 " Diff {{{1
@@ -213,15 +207,6 @@ function! s:option_map(letter, option, mode) abort
   exe 'nnoremap ]o'.a:letter ':'.a:mode.' no'.a:option.'<C-R>=<SID>statusbump()<CR><CR>'
   exe 'nnoremap co'.a:letter ':'.a:mode.' <C-R>=<SID>toggle("'.a:option.'")<CR><CR>'
 endfunction
-
-nnoremap [ob :set background=light<CR>
-nnoremap ]ob :set background=dark<CR>
-nnoremap cob :set background=<C-R>=&background == 'dark' ? 'light' : 'dark'<CR><CR>
-call s:option_map('c', 'cursorline', 'setlocal')
-call s:option_map('u', 'cursorcolumn', 'setlocal')
-nnoremap [od :diffthis<CR>
-nnoremap ]od :diffoff<CR>
-nnoremap cod :<C-R>=&diff ? 'diffoff' : 'diffthis'<CR><CR>
 call s:option_map('h', 'hlsearch', 'set')
 call s:option_map('i', 'ignorecase', 'set')
 call s:option_map('l', 'list', 'setlocal')
@@ -229,9 +214,23 @@ call s:option_map('n', 'number', 'setlocal')
 call s:option_map('r', 'relativenumber', 'setlocal')
 call s:option_map('s', 'spell', 'setlocal')
 call s:option_map('w', 'wrap', 'setlocal')
+
+nnoremap [ob :set background=light<CR>
+nnoremap ]ob :set background=dark<CR>
+nnoremap cob :set background=<C-R>=&background == 'dark' ? 'light' : 'dark'<CR><CR>
+
+nnoremap [oc :set colorcolumn=80<CR>
+nnoremap ]oc :set colorcolumn=0<CR>
+nnoremap coc :set colorcolumn=<C-R>=&colorcolumn == 80 ? 0 : 80<CR><CR>
+
+nnoremap [od :diffthis<CR>
+nnoremap ]od :diffoff<CR>
+nnoremap cod :<C-R>=&diff ? 'diffoff' : 'diffthis'<CR><CR>
+
 nnoremap [ox :set cursorline cursorcolumn<CR>
 nnoremap ]ox :set nocursorline nocursorcolumn<CR>
 nnoremap cox :set <C-R>=&cursorline && &cursorcolumn ? 'nocursorline nocursorcolumn' : 'cursorline cursorcolumn'<CR><CR>
+
 nnoremap [ov :set virtualedit+=all<CR>
 nnoremap ]ov :set virtualedit-=all<CR>
 nnoremap cov :set <C-R>=(&virtualedit =~# "all") ? 'virtualedit-=all' : 'virtualedit+=all'<CR><CR>
