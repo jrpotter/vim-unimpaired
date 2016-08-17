@@ -215,10 +215,6 @@ call s:option_map('r', 'relativenumber', 'setlocal')
 call s:option_map('s', 'spell', 'setlocal')
 call s:option_map('w', 'wrap', 'setlocal')
 
-nnoremap [ob :set background=light<CR>
-nnoremap ]ob :set background=dark<CR>
-nnoremap cob :set background=<C-R>=&background == 'dark' ? 'light' : 'dark'<CR><CR>
-
 nnoremap [oc :set colorcolumn=80<CR>
 nnoremap ]oc :set colorcolumn=0<CR>
 nnoremap coc :set colorcolumn=<C-R>=&colorcolumn == 80 ? 0 : 80<CR><CR>
@@ -234,29 +230,6 @@ nnoremap cox :set <C-R>=&cursorline && &cursorcolumn ? 'nocursorline nocursorcol
 nnoremap [ov :set virtualedit+=all<CR>
 nnoremap ]ov :set virtualedit-=all<CR>
 nnoremap cov :set <C-R>=(&virtualedit =~# "all") ? 'virtualedit-=all' : 'virtualedit+=all'<CR><CR>
-
-function! s:setup_paste() abort
-  let s:paste = &paste
-  let s:mouse = &mouse
-  set paste
-  set mouse=
-  augroup unimpaired_paste
-    autocmd!
-    autocmd InsertLeave *
-          \ if exists('s:paste') |
-          \   let &paste = s:paste |
-          \   let &mouse = s:mouse |
-          \   unlet s:paste |
-          \   unlet s:mouse |
-          \ endif |
-          \ autocmd! unimpaired_paste
-  augroup END
-endfunction
-
-nnoremap <silent> <Plug>unimpairedPaste :call <SID>setup_paste()<CR>
-
-nnoremap <silent> yo  :call <SID>setup_paste()<CR>o
-nnoremap <silent> yO  :call <SID>setup_paste()<CR>O
 
 " }}}1
 " Put {{{1
@@ -276,12 +249,6 @@ nnoremap <silent> <Plug>unimpairedPutBelow :call <SID>putline(']p', 'Below')<CR>
 
 nmap [p <Plug>unimpairedPutAbove
 nmap ]p <Plug>unimpairedPutBelow
-nnoremap <silent> >P :call <SID>putline('[p', 'Above')<CR>>']
-nnoremap <silent> >p :call <SID>putline(']p', 'Below')<CR>>']
-nnoremap <silent> <P :call <SID>putline('[p', 'Above')<CR><']
-nnoremap <silent> <p :call <SID>putline(']p', 'Below')<CR><']
-nnoremap <silent> =P :call <SID>putline('[p', 'Above')<CR>=']
-nnoremap <silent> =p :call <SID>putline(']p', 'Below')<CR>=']
 
 " }}}1
 " Encoding and decoding {{{1
