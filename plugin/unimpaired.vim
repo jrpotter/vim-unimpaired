@@ -219,6 +219,10 @@ nnoremap [oc :set colorcolumn=80<CR>
 nnoremap ]oc :set colorcolumn=0<CR>
 nnoremap coc :set colorcolumn=<C-R>=&colorcolumn == 80 ? 0 : 80<CR><CR>
 
+nnoremap [ot :set textwidth=80<CR>
+nnoremap ]ot :set textwidth=0<CR>
+nnoremap cot :set textwidth=<C-R>=&textwidth == 80 ? 0 : 80<CR><CR>
+
 nnoremap [od :diffthis<CR>
 nnoremap ]od :diffoff<CR>
 nnoremap cod :<C-R>=&diff ? 'diffoff' : 'diffthis'<CR><CR>
