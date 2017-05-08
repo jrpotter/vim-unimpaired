@@ -35,108 +35,6 @@ call s:MapNextFamily('l','l')
 call s:MapNextFamily('q','c')
 call s:MapNextFamily('t','t')
 
-function! s:entries(path)
-  let path = substitute(a:path,'[\\/]$','','')
-  let files = split(glob(path."/.*"),"\n")
-  let files += split(glob(path."/*"),"\n")
-  call map(files,'substitute(v:val,"[\\/]$","","")')
-  call filter(files,'v:val !~# "[\\\\/]\\.\\.\\=$"')
-
-  let filter_suffixes = substitute(escape(&suffixes, '~.*$^'), ',', '$\\|', 'g') .'$'
-  call filter(files, 'v:val !~# filter_suffixes')
-
-  return files
-endfunction
-
-function! s:FileByOffset(num)
-  let file = expand('%:p')
-  let num = a:num
-  while num
-    let files = s:entries(fnamemodify(file,':h'))
-    if a:num < 0
-      call reverse(sort(filter(files,'v:val <# file')))
-    else
-      call sort(filter(files,'v:val ># file'))
-    endif
-    let temp = get(files,0,'')
-    if temp == ''
-      let file = fnamemodify(file,':h')
-    else
-      let file = temp
-      while isdirectory(file)
-        let files = s:entries(file)
-        if files == []
-          " TODO: walk back up the tree and continue
-          break
-        endif
-        let file = files[num > 0 ? 0 : -1]
-      endwhile
-      let num += num > 0 ? -1 : 1
-    endif
-  endwhile
-  return file
-endfunction
-
-function! s:fnameescape(file) abort
-  if exists('*fnameescape')
-    return fnameescape(a:file)
-  else
-    return escape(a:file," \t\n*?[{`$\\%#'\"|!<")
-  endif
-endfunction
-
-nnoremap <silent> <Plug>unimpairedDirectoryNext     :<C-U>edit <C-R>=fnamemodify(<SID>fnameescape(<SID>FileByOffset(v:count1)), ':.')<CR><CR>
-nnoremap <silent> <Plug>unimpairedDirectoryPrevious :<C-U>edit <C-R>=fnamemodify(<SID>fnameescape(<SID>FileByOffset(-v:count1)), ':.')<CR><CR>
-nmap ]f <Plug>unimpairedDirectoryNext
-nmap [f <Plug>unimpairedDirectoryPrevious
-
-" }}}1
-" Diff {{{1
-
-nmap [n <Plug>unimpairedContextPrevious
-nmap ]n <Plug>unimpairedContextNext
-omap [n <Plug>unimpairedContextPrevious
-omap ]n <Plug>unimpairedContextNext
-
-nnoremap <silent> <Plug>unimpairedContextPrevious :call <SID>Context(1)<CR>
-nnoremap <silent> <Plug>unimpairedContextNext     :call <SID>Context(0)<CR>
-onoremap <silent> <Plug>unimpairedContextPrevious :call <SID>ContextMotion(1)<CR>
-onoremap <silent> <Plug>unimpairedContextNext     :call <SID>ContextMotion(0)<CR>
-
-function! s:Context(reverse)
-  call search('^\(@@ .* @@\|[<=>|]\{7}[<=>|]\@!\)', a:reverse ? 'bW' : 'W')
-endfunction
-
-function! s:ContextMotion(reverse)
-  if a:reverse
-    -
-  endif
-  call search('^@@ .* @@\|^diff \|^[<=>|]\{7}[<=>|]\@!', 'bWc')
-  if getline('.') =~# '^diff '
-    let end = search('^diff ', 'Wn') - 1
-    if end < 0
-      let end = line('$')
-    endif
-  elseif getline('.') =~# '^@@ '
-    let end = search('^@@ .* @@\|^diff ', 'Wn') - 1
-    if end < 0
-      let end = line('$')
-    endif
-  elseif getline('.') =~# '^=\{7\}'
-    +
-    let end = search('^>\{7}>\@!', 'Wnc')
-  elseif getline('.') =~# '^[<=>|]\{7\}'
-    let end = search('^[<=>|]\{7}[<=>|]\@!', 'Wn') - 1
-  else
-    return
-  endif
-  if end > line('.')
-    execute 'normal! V'.(end - line('.')).'j'
-  elseif end == line('.')
-    normal! V
-  endif
-endfunction
-
 " }}}1
 " Line operations {{{1
 
@@ -147,7 +45,7 @@ function! s:BlankUp(count) abort
 endfunction
 
 function! s:BlankDown(count) abort
-  put =repeat(nr2char(10), a:count)
+  put = repeat(nr2char(10), a:count)
   '[-1
   silent! call repeat#set("\<Plug>unimpairedBlankDown", a:count)
 endfunction
