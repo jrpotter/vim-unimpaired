@@ -16,8 +16,7 @@ line with the one above or below it.
 There are mappings for toggling options. `[os`, `]os`, and `cos` perform
 `:set spell`, `:set nospell`, and `:set invspell`, respectively.  There's also
 `l` (`list`), `n` (`number`), `w` (`wrap`), `x` (`cursorline cursorcolumn`),
-and several others, plus mappings to help alleviate the `set paste` dance.
-Consult the documentation.
+and several others. Consult the documentation.
 
 ## Installation
 
