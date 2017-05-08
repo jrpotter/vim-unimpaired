@@ -10,13 +10,14 @@ let g:loaded_unimpaired = 1
 
 " Next and previous {{{1
 
-function! s:MapNextFamily(map,cmd)
-  let cmd = '" . (v:count ? v:count : "") . "' . a:cmd
-  let end = '"<CR>' . (a:cmd == 'l' || a:cmd == 'c' ? 'zv' : '')
-  execute 'nmap <silent> ['.        a:map .' '.':<C-u>exe "'.cmd.'previous'.end
-  execute 'nmap <silent> ]'.        a:map .' '.':<C-u>exe "'.cmd.'next'.end
-  execute 'nmap <silent> ['.toupper(a:map).' '.':<C-u>exe "'.cmd.'first'.end
-  execute 'nmap <silent> ]'.toupper(a:map).' '.':<C-u>exe "'.cmd.'last'.end
+function! s:MapNextFamily(map, cmd)
+  let l:map = toupper(a:map)
+  let l:cmd = '" . (v:count ? v:count : "") . "' . a:cmd
+  let l:end = '"<CR>' . (a:cmd == 'l' || a:cmd == 'c' ? 'zv' : '')
+  exe join(['nmap <silent> [' . a:map, '<C-u>exe', l:cmd . 'prev' . l:end])
+  exe join(['nmap <silent> ]' . a:map, '<C-u>exe', l:cmd . 'next' . l:end])
+  exe join(['nmap <silent> [' . l:map, '<C-u>exe', l:cmd . 'firs' . l:end])
+  exe join(['nmap <silent> ]' . l:map, '<C-u>exe', l:cmd . 'last' . l:end])
 endfunction
 call s:MapNextFamily('a','')
 call s:MapNextFamily('b','b')
@@ -28,12 +29,12 @@ call s:MapNextFamily('t','t')
 " Line operations {{{1
 
 function! s:BlankUp(count) abort
-  put!=repeat(nr2char(10), a:count)
+  put != repeat(nr2char(10), a:count)
   ']+1
 endfunction
 
 function! s:BlankDown(count) abort
-  put =repeat(nr2char(10), a:count)
+  put = repeat(nr2char(10), a:count)
   '[-1
 endfunction
 
