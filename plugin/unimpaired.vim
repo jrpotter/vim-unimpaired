@@ -30,12 +30,12 @@ call s:MapNextFamily('t','t')
 " Line operations {{{1
 
 function! s:BlankUp(count) abort
-  put! = repeat(nr2char(10), a:count)
+  put! =repeat(nr2char(10), a:count)
   ']+1
 endfunction
 
 function! s:BlankDown(count) abort
-  put = repeat(nr2char(10), a:count)
+  put =repeat(nr2char(10), a:count)
   '[-1
 endfunction
 
@@ -69,7 +69,7 @@ xmap <silent> ]e :<C-u>call <SID>MoveSelectionDown(v:count1)<CR>
 " Option toggling {{{1
 
 function! s:option_map(letter, option, mode) abort
-  for [key, value] in { '[' : '', ']' : 'no' }
+  for [key, value] in items({ '[' : '', ']' : 'no' })
     let l:cmd = ':' . a:mode . ' ' . value . a:option
     exe 'nnoremap <silent> ' . key . 'o' . a:letter . ' ' . l:cmd .
           \ '<Bar> redrawstatus<CR>'
