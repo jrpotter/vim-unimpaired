@@ -12,12 +12,12 @@ let g:loaded_unimpaired = 1
 
 function! s:MapNextFamily(map, cmd)
   let l:map = toupper(a:map)
-  let l:cmd = '" . (v:count ? v:count : "") . "' . a:cmd
+  let l:cmd = '(v:count ? v:count : "") . "' . a:cmd
   let l:end = '"<CR>' . (a:cmd == 'l' || a:cmd == 'c' ? 'zv' : '')
-  exe join(['nmap <silent> [' . a:map, '<C-u>exe', l:cmd . 'prev' . l:end])
-  exe join(['nmap <silent> ]' . a:map, '<C-u>exe', l:cmd . 'next' . l:end])
-  exe join(['nmap <silent> [' . l:map, '<C-u>exe', l:cmd . 'firs' . l:end])
-  exe join(['nmap <silent> ]' . l:map, '<C-u>exe', l:cmd . 'last' . l:end])
+  exe join(['nmap <silent> [' . a:map, ':<C-u>exe', l:cmd . 'prev' . l:end])
+  exe join(['nmap <silent> ]' . a:map, ':<C-u>exe', l:cmd . 'next' . l:end])
+  exe join(['nmap <silent> [' . l:map, ':<C-u>exe', l:cmd . 'firs' . l:end])
+  exe join(['nmap <silent> ]' . l:map, ':<C-u>exe', l:cmd . 'last' . l:end])
 endfunction
 call s:MapNextFamily('a','')
 call s:MapNextFamily('b','b')
