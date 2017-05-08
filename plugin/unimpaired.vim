@@ -30,7 +30,7 @@ call s:MapNextFamily('t','t')
 " Line operations {{{1
 
 function! s:BlankUp(count) abort
-  put != repeat(nr2char(10), a:count)
+  put! = repeat(nr2char(10), a:count)
   ']+1
 endfunction
 
