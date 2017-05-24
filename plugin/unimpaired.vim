@@ -20,11 +20,11 @@ function! s:MapNextFamily(map, cmd)
   exe join(['nmap <silent> ]' . l:map, ':<C-u>exe ', l:cmd . 'last' . l:end])
 endfunction
 
-call s:MapNextFamily('a','')
-call s:MapNextFamily('b','b')
-call s:MapNextFamily('l','l')
-call s:MapNextFamily('q','c')
-call s:MapNextFamily('t','t')
+call s:MapNextFamily('a', '')
+call s:MapNextFamily('b', 'b')
+call s:MapNextFamily('l', 'l')
+call s:MapNextFamily('q', 'c')
+call s:MapNextFamily('t', 't')
 
 " }}}1
 " Line operations {{{1
@@ -60,29 +60,28 @@ function! s:MoveSelectionDown(count) abort
   norm! ``
 endfunction
 
-nmap <silent> [e :<C-u>call <SID>Move('--',v:count1,'Up')<CR>
-nmap <silent> ]e :<C-u>call <SID>Move('+',v:count1,'Down')<CR>
+nmap <silent> [e :<C-u>call <SID>Move('--', v:count1, 'Up')<CR>
+nmap <silent> ]e :<C-u>call <SID>Move('+', v:count1, 'Down')<CR>
 xmap <silent> [e :<C-u>call <SID>MoveSelectionUp(v:count1)<CR>
 xmap <silent> ]e :<C-u>call <SID>MoveSelectionDown(v:count1)<CR>
 
 " }}}1
 " Option toggling {{{1
 
-function! s:option_map(letter, option, mode) abort
+function! s:option_map(letter, option) abort
   for [key, value] in items({ '[' : '', ']' : 'no' })
-    let l:cmd = ':' . a:mode . ' ' . value . a:option
+    let l:cmd = ':setlocal ' . value . a:option
     exe 'nnoremap <silent> ' . key . 'o' . a:letter . ' ' . l:cmd .
           \ '<Bar> redrawstatus<CR>'
   endfor
 endfunction
 
-call s:option_map('h', 'hlsearch', 'set')
-call s:option_map('i', 'ignorecase', 'set')
-call s:option_map('l', 'list', 'setlocal')
-call s:option_map('n', 'number', 'setlocal')
-call s:option_map('r', 'relativenumber', 'setlocal')
-call s:option_map('s', 'spell', 'setlocal')
-call s:option_map('w', 'wrap', 'setlocal')
+call s:option_map('h', 'hlsearch')
+call s:option_map('i', 'ignorecase')
+call s:option_map('n', 'number')
+call s:option_map('r', 'relativenumber')
+call s:option_map('s', 'spell')
+call s:option_map('w', 'wrap')
 
 nnoremap [oc :set colorcolumn=80<CR>
 nnoremap ]oc :set colorcolumn=0<CR>
@@ -92,6 +91,20 @@ nnoremap ]ox :set nocursorline nocursorcolumn<CR>
 
 nnoremap [ov :set virtualedit+=all<CR>
 nnoremap ]ov :set virtualedit-=all<CR>
+
+function! s:window_option_map(letter)
+  for l:key in ['[', ']']
+    let l:cmd = ':windo exe "norm ' . l:key . 'o' . a:letter . '"<CR>'
+    exe 'nnoremap ' . l:key . 'wo' . a:letter l:cmd
+  endfor
+endfunction
+
+call s:window_option_map('n')
+call s:window_option_map('r')
+call s:window_option_map('s')
+call s:window_option_map('w')
+call s:window_option_map('c')
+call s:window_option_map('x')
 
 " }}}1
 
