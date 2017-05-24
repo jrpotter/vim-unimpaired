@@ -52,18 +52,25 @@ LINE OPERATIONS                                 *unimpaired-lines*
 
 OPTION TOGGLING                                 *unimpaired-toggling*
 
-On	Off	Toggle	Option
-*[ob*	*]ob*	*cob*	'background' (dark is off, light is on)
-*[oc*	*]oc*	*coc*	'cursorline'
-*[oh*	*]oh*	*coh*	'hlsearch'
-*[oi*	*]oi*	*coi*	'ignorecase'
-*[ol*	*]ol*	*col*	'list'
-*[on*	*]on*	*con*	'number'
-*[or*	*]or*	*cor*	'relativenumber'
-*[os*	*]os*	*cos*	'spell'
-*[ou*	*]ou*	*cou*	'cursorcolumn'
-*[ov*	*]ov*	*cov*	'virtualedit'
-*[ow*	*]ow*	*cow*	'wrap'
-*[ox*	*]ox*	*cox*	'cursorline' 'cursorcolumn' (x as in crosshairs)
+On	  Off	  Option
+*[oc*	*]oc*	'colorcolumn'
+*[oh*	*]oh*	'hlsearch'
+*[oi*	*]oi*	'ignorecase'
+*[on*	*]on*	'number'
+*[or*	*]or*	'relativenumber'
+*[os*	*]os*	'spell'
+*[ov*	*]ov*	'virtualedit'
+*[ow*	*]ow*	'wrap'
+*[ox*	*]ox*	'cursorline' 'cursorcolumn' (x as in crosshairs)
+
+WINDOW OPTION TOGGLING                          *unimpaired-window-toggling*
+
+On	    Off	    Option
+*[woc*	*]woc*	'colorcolumn'
+*[won*	*]won*	'number'
+*[wor*	*]wor*	'relativenumber'
+*[wos*	*]wos*	'spell'
+*[wow*	*]wow*	'wrap'
+*[wox*	*]wox*	'cursorline' 'cursorcolumn' (x as in crosshairs)
 
  vim:tw=78:et:ft=help:norl:
