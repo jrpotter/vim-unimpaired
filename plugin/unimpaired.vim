@@ -93,10 +93,16 @@ nnoremap ]ox :set nocursorline nocursorcolumn<CR>
 nnoremap [ov :set virtualedit+=all<CR>
 nnoremap ]ov :set virtualedit-=all<CR>
 
+function! Unimpaired_WindowSaveIndex(key, letter)
+  let l:win = winnr()
+  windo exe 'norm ' . a:key . 'o' . a:letter
+  exe l:win . 'wincmd w'
+endfunction
+
 function! s:window_option_map(letter)
   for l:key in ['[', ']']
-    let l:cmd = ':windo exe "norm ' . l:key . 'o' . a:letter . '"<CR>'
-    exe 'nnoremap ' . l:key . 'wo' . a:letter l:cmd
+    exe 'nnoremap <silent> ' . l:key . 'wo' . a:letter
+          \ ':call g:Unimpaired_WindowSaveIndex("' . l:key . '", "' . a:letter . '")<CR>'
   endfor
 endfunction
 
