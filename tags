@@ -1,0 +1,30 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	/cf872f9/
+Unimpaired_WindowSaveIndex	plugin/unimpaired.vim	/^function! Unimpaired_WindowSaveIndex(key, letter)$/;"	f
+[<Space>	plugin/unimpaired.vim	/^nmap <silent> [<Space> :<C-u>call <SID>BlankUp(v:count1)<CR>$/;"	m
+[e	plugin/unimpaired.vim	/^nmap <silent> [e :<C-u>call <SID>Move('--', v:count1, 'Up')<CR>$/;"	m
+[e	plugin/unimpaired.vim	/^xmap <silent> [e :<C-u>call <SID>MoveSelectionUp(v:count1)<CR>$/;"	m
+[oc	plugin/unimpaired.vim	/^nnoremap [oc :set colorcolumn=80<CR>$/;"	m
+[of	plugin/unimpaired.vim	/^nnoremap [of :set foldcolumn=3<CR>$/;"	m
+[ov	plugin/unimpaired.vim	/^nnoremap [ov :set virtualedit+=all<CR>$/;"	m
+[ox	plugin/unimpaired.vim	/^nnoremap [ox :set cursorline cursorcolumn<CR>$/;"	m
+]<Space>	plugin/unimpaired.vim	/^nmap <silent> ]<Space> :<C-u>call <SID>BlankDown(v:count1)<CR>$/;"	m
+]e	plugin/unimpaired.vim	/^nmap <silent> ]e :<C-u>call <SID>Move('+', v:count1, 'Down')<CR>$/;"	m
+]e	plugin/unimpaired.vim	/^xmap <silent> ]e :<C-u>call <SID>MoveSelectionDown(v:count1)<CR>$/;"	m
+]oc	plugin/unimpaired.vim	/^nnoremap ]oc :set colorcolumn=0<CR>$/;"	m
+]of	plugin/unimpaired.vim	/^nnoremap ]of :set foldcolumn=0<CR>$/;"	m
+]ov	plugin/unimpaired.vim	/^nnoremap ]ov :set virtualedit-=all<CR>$/;"	m
+]ox	plugin/unimpaired.vim	/^nnoremap ]ox :set nocursorline nocursorcolumn<CR>$/;"	m
+g:loaded_unimpaired	plugin/unimpaired.vim	/^let g:loaded_unimpaired = 1$/;"	v
+s:BlankDown	plugin/unimpaired.vim	/^function! s:BlankDown(count) abort$/;"	f
+s:BlankUp	plugin/unimpaired.vim	/^function! s:BlankUp(count) abort$/;"	f
+s:MapNextFamily	plugin/unimpaired.vim	/^function! s:MapNextFamily(map, cmd)$/;"	f
+s:Move	plugin/unimpaired.vim	/^function! s:Move(cmd, count, map) abort$/;"	f
+s:MoveSelectionDown	plugin/unimpaired.vim	/^function! s:MoveSelectionDown(count) abort$/;"	f
+s:MoveSelectionUp	plugin/unimpaired.vim	/^function! s:MoveSelectionUp(count) abort$/;"	f
+s:option_map	plugin/unimpaired.vim	/^function! s:option_map(letter, option) abort$/;"	f
+s:window_option_map	plugin/unimpaired.vim	/^function! s:window_option_map(letter)$/;"	f

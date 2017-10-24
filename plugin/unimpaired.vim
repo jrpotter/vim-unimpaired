@@ -87,6 +87,9 @@ call s:option_map('w', 'wrap')
 nnoremap [oc :set colorcolumn=80<CR>
 nnoremap ]oc :set colorcolumn=0<CR>
 
+nnoremap [of :set foldcolumn=3<CR>
+nnoremap ]of :set foldcolumn=0<CR>
+
 nnoremap [ox :set cursorline cursorcolumn<CR>
 nnoremap ]ox :set nocursorline nocursorcolumn<CR>
 
